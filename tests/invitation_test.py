@@ -1,7 +1,7 @@
 import types
 import unittest
 
-from invitation import find_nearby_customers
+from src.invitation import find_nearby_customers
 
 from src.customer import Customer
 
