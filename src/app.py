@@ -1,12 +1,19 @@
 from src.invitation import create_invitations
+import logging
 
 if __name__ == "__main__":
     # The GPS coordinates for our Dublin office are 53.3393, -6.2576841
-    invitations = create_invitations(
-        customer_file_path="customers.json",
-        base_lat=53.3393,
-        base_lon=-6.2576841,
-        distance=100 * 1000)  # converting 100km into meters
+    logger = logging.getLogger(__name__)
+
+    try:
+        invitations = create_invitations(
+            customer_file_path="customers.json",
+            base_lat=53.3393,
+            base_lon=-6.2576841,
+            distance=100 * 1000)  # converting 100km into meters
+    except FileNotFoundError as e:
+        logger.error("customers.json not found")
+        raise
 
     """
     according to the customers in customers.json file, we are going to invite

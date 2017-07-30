@@ -18,3 +18,10 @@ class Customer:
     def __str__(self, *args, **kwargs):
         return "(id={customer_id}, name={name}, lat={lat}, lon={lon})"\
             .format(**self.__dict__)
+
+    def __eq__(self, other):
+        # to make 'set' operation works properly on customer objects.
+        return self.customer_id == other.customer_id
+
+    def __hash__(self):
+        return self.customer_id
