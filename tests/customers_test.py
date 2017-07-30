@@ -1,6 +1,6 @@
 import unittest
 
-from customer import Customer
+from src.customer import Customer
 
 
 class CustomerTest(unittest.TestCase):

@@ -1,8 +1,9 @@
 import operator
 
-from item_reader import file_line_stream
 from gcd import GCD
-from customer import Customer
+from item_reader import file_line_stream
+
+from src.customer import Customer
 
 
 def find_nearby_customers(customers, base_lat, base_lon, distance):

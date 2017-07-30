@@ -1,8 +1,9 @@
 import types
 import unittest
 
-from customer import Customer
 from invitation import find_nearby_customers
+
+from src.customer import Customer
 
 
 class InvitationTest(unittest.TestCase):

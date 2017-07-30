@@ -1,7 +1,7 @@
 import types
 import unittest
 
-from item_reader import file_line_stream
+from src.item_reader import file_line_stream
 
 
 class ItemReaderTest(unittest.TestCase):
