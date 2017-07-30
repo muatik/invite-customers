@@ -2,7 +2,6 @@ from src.invitation import create_invitations
 
 if __name__ == "__main__":
     # The GPS coordinates for our Dublin office are 53.3393, -6.2576841
-
     invitations = create_invitations(
         customer_file_path="customers.json",
         base_lat=53.3393,
