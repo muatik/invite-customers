@@ -9,7 +9,7 @@ references about calculating distance between two points(latitude, longtitude):
 ### Run
 ```sh
 git clone git@github.com:muatik/invite-customers.git
-cd invite-customers
+cd invite-customers/src
 python src/app.py
 ```
 
