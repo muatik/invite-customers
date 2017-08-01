@@ -1,25 +1,22 @@
 import operator
 
-from src.customer import Customer
-from src.gcd import GCD
-from src.item_reader import file_line_stream
+from customer import Customer
+from gcd import GCD
+from item_reader import file_line_stream
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-def find_nearby_customers(customers, base_lat, base_lon, distance):
+def find_nearby_customers(customers, gcd, distance):
     """
     finds customers who is within the distance to base latitude and longitude
 
     :param customers: list of customer objects
-    :param base_lat:  float
-    :param base_lon: float
+    :param gcd:  GCD instance with base lat long initialized
     :param distance: float in meters
     :return: generator of nearby customers
     """
-    gcd = GCD()
-    gcd.set_base(base_lat, base_lon)
 
     for customer in customers:
         if gcd.is_nearby(customer.lat, customer.lon, distance):
@@ -56,10 +53,12 @@ def create_invitations(customer_file_path, base_lat, base_lon, distance):
     3. printing invitation list
 
     """
+    gcd = GCD()
+    gcd.set_base(base_lat, base_lon)
     lines = file_line_stream(customer_file_path)
     customers = convert_to_customers(lines)  # generator of customer objects)
     customers = find_nearby_customers(
-        customers, base_lat, base_lon, distance)  # generator of invitation list
+        customers, gcd, distance)  # generator of invitation list
 
     return sorted(
             set(customers),  # to get rid of duplicate customers

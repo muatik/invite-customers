@@ -1,9 +1,10 @@
 import types
 import unittest
 
-from src.invitation import find_nearby_customers
+from ..gcd import GCD
+from ..invitation import find_nearby_customers
 
-from src.customer import Customer
+from ..customer import Customer
 
 
 class InvitationTest(unittest.TestCase):
@@ -24,24 +25,25 @@ class InvitationTest(unittest.TestCase):
                 '{"latitude": "54.22312", "user_id": 3, "name": "Obama",'
                 '"longitude": "-7.02099"}')  # ~ 110km to base
         ]
-
+        gcd = GCD()
+        gcd.set_base(base_lat, base_lon)
         nearby = find_nearby_customers(
-            customers, base_lat, base_lon, distance=80*1000)
+            customers, gcd, distance=80*1000)
 
         self.assertTrue(isinstance(nearby, types.GeneratorType))
         self.assertEqual(len(list(nearby)), 0)
 
         nearby = list(find_nearby_customers(
-            customers, base_lat, base_lon, distance=90*1000))
+            customers, gcd, distance=90*1000))
         self.assertEqual(len(nearby), 1)
         self.assertEqual(nearby[0].name, "Alice")
 
         nearby = list(find_nearby_customers(
-            customers, base_lat, base_lon, distance=109*1000))
+            customers, gcd, distance=109*1000))
         self.assertEqual(len(nearby), 2)
         self.assertIn("Alice", [c.name for c in nearby])
         self.assertIn("John", [c.name for c in nearby])
 
         nearby = list(find_nearby_customers(
-            customers, base_lat, base_lon, distance=111 * 1000))
+            customers, gcd, distance=111 * 1000))
         self.assertEqual(len(nearby), 3)

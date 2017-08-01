@@ -1,5 +1,6 @@
-from src.invitation import create_invitations
 import logging
+
+from invitation import create_invitations
 
 if __name__ == "__main__":
     # The GPS coordinates for our Dublin office are 53.3393, -6.2576841
@@ -13,7 +14,7 @@ if __name__ == "__main__":
             distance=100 * 1000)  # converting 100km into meters
     except FileNotFoundError as e:
         logger.error("customers.json not found")
-        raise
+        raise  # from this point, cannot be continued
 
     """
     according to the customers in customers.json file, we are going to invite
